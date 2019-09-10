@@ -12,11 +12,13 @@ import org.apache.commons.exec.ExecuteException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -25,8 +27,8 @@ public class BaseTest {
     public WebDriver driver;
 
     @Parameters({"appos"})
-    @BeforeSuite
-    public  void beforeSuite(String appos) throws Exception {
+    @BeforeMethod
+    public  void beforeSuite(String appos, Method methodName) throws Exception {
 
         try{
             startServer();
@@ -48,6 +50,7 @@ public class BaseTest {
             cap.setCapability("deviceName","Android Emulator");
             cap.setCapability("platformName","Android");
             cap.setCapability("app", app.getAbsolutePath());
+            cap.setCapability("name", methodName.getName());
             driver=new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
 
         }
@@ -61,8 +64,22 @@ public class BaseTest {
             cap.setCapability("automationName","XCUITest");
             cap.setCapability("platformVersion","12.4");
             cap.setCapability("app", app.getAbsolutePath());
+            cap.setCapability("name", methodName.getName());
             driver=new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
 
+        }
+
+    }
+
+    @BeforeSuite
+    public  void beforeSuite() throws Exception {
+
+        try{
+            startServer();
+        }
+        catch (Exception e) {
+            System.out.println("Unable to start appium server");
+            throw new Exception(e.getMessage());
         }
 
     }
@@ -88,7 +105,7 @@ public class BaseTest {
         service.start();
     }
 
-    //@AfterSuite
+    @AfterSuite
     public void stopServer() {
         service.stop();
     }
