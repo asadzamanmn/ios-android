@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="mobile-automation-framework">
-    <parameter name="os" value="ios" />
+    <parameter name="appos" value="ios" />
 
     <test name="automation-tests-ios">
         <classes>
