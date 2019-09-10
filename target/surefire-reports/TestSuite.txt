@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 16.217 sec <<< FAILURE!
+logInAndroid(com.app.test.android.AndroidSmokeTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at com.app.test.android.AndroidSmokeTest.logInAndroid(AndroidSmokeTest.java:12)
+

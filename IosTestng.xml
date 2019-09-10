@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="mobile-automation-framework">
+    <parameter name="os" value="ios" />
+
+    <test name="automation-tests-ios">
+        <classes>
+            <class name="com.app.test.ios.IosSmokeTest" />
+        </classes>
+    </test>
+</suite>
